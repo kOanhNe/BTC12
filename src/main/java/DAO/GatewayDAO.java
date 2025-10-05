@@ -3,15 +3,19 @@ package DAO;
 import java.sql.*;
 
 public class GatewayDAO {
-
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/my_database?useSSL=false&allowPublicKeyRetrieval=true";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "kieuoanh"; // Thay mật khẩu của bạn
+    // Đọc thông tin kết nối từ biến môi trường
+    private static final String DB_URL = System.getenv("DB_URL");
+    private static final String DB_USER = System.getenv("DB_USER");
+    private static final String DB_PASSWORD = System.getenv("DB_PASSWORD");
 
     private Connection getConnection() throws SQLException, ClassNotFoundException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
+
+        Class.forName("org.postgresql.Driver"); 
+       
         return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
     }
+    
+    
 
     public String executeStatement(String sql) {
         if (sql == null || sql.trim().isEmpty()) {

@@ -1,0 +1,5 @@
+# Bỏ qua thư mục build của Maven và các file của IDE
+/target
+.settings
+.classpath
+.project
